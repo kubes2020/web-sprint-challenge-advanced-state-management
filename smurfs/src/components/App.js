@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
+import { fetchSmurfs } from "../actions/smurfsActions";
+import {connect} from "react-redux";
+
 class App extends Component {
+  componentDidMount(){
+  console.log("comp did mount")
+    this.props.fetchSmurfs()
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,4 +21,14 @@ class App extends Component {
   }
 }
 
-export default App;
+// export default App;
+
+const mapStateToProps = (state) =>{
+  return {
+    name: state.name,
+    age: state.age,
+    height: state.height,
+    id: state.id,
+  }
+}
+export default connect(mapStateToProps, {fetchSmurfs})(App)
