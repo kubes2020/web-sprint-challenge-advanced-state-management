@@ -3,6 +3,7 @@ import {
     FETCH_SMURFS_START, 
     FETCH_SMURFS_SUCCESS, 
     FETCH_SMURFS_FAILURE } from "../actions/smurfsActions";
+import { ADD_SMURFS } from "../actions/addSmurfsActions";
 
     const initialState = {
         network: {
@@ -10,9 +11,7 @@ import {
             erros: "",
         },
         
-        smurfs: [
-            
-        ]
+        smurfs: []
     }
 export const smurfsReducer = (state = initialState, action) => {
     console.log("action.payload!", action.payload)
@@ -26,13 +25,18 @@ export const smurfsReducer = (state = initialState, action) => {
                     ...state, smurfs: action.payload,
                     network: {...state.network, isLoading: false}
                 }
-//need to also include isLoading: false
 
         case FETCH_SMURFS_FAILURE:
             return{
                 ...state, network:{
                     ...state.network, isLoading: false, error: "you have an error!"}
             }
+
+        case ADD_SMURFS:
+            return{
+                ...state, smurfs: [...state.smurfs, action.payload] 
+            }
+
         default:
             return state
     }

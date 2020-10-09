@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { addSmurfs } from "../actions/addSmurfsActions";
+import { connect } from "react-redux";
 
-export const Form = () => {
+const Form = (props) => {
     const [formState, setFormState] = useState({
         name: "",
         age: "",
@@ -9,13 +11,17 @@ export const Form = () => {
 
     const handleChange = (e) => {
         e.persist()
-        setFormState({ [e.target.name]: e.target.value})
+        setFormState({...formState, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = (e) =>{
+        e.preventDefault()
     }
 
     return(
         <>
         <h2>Test Form</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name:
             <input name="name" id="name" type="text" value={formState.name} onChange={handleChange}></input>
             </label>
@@ -25,7 +31,15 @@ export const Form = () => {
             <label htmlFor="height">Height:
             <input name="height" id="height" type="text" value={formState.height} onChange={handleChange}></input>
             </label>
+            <button onClick={()=>props.addSmurfs(formState)}>Submit</button>
         </form>
         </>     
     )
 }
+
+const mapStateToProps = (state) =>{
+    return {
+      
+    }
+  }
+  export default connect(mapStateToProps, {addSmurfs})(Form)
