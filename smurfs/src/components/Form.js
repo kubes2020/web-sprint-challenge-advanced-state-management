@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { addSmurfs } from "../actions/addSmurfsActions";
+import {addSmurfs} from "../actions/addSmurfsActions";
 import { connect } from "react-redux";
 
 const Form = (props) => {
@@ -16,11 +16,16 @@ const Form = (props) => {
 
     const handleSubmit = (e) =>{
         e.preventDefault()
+        setFormState({
+            name: "",
+            age: "",
+            height: "",
+        })
     }
 
     return(
         <>
-        <h2>Test Form</h2>
+        <h2>Join The Village</h2>
         <form onSubmit={handleSubmit}>
             <label htmlFor="name">Name:
             <input name="name" id="name" type="text" value={formState.name} onChange={handleChange}></input>

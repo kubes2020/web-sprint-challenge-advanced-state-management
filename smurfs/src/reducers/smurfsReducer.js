@@ -3,7 +3,7 @@ import {
     FETCH_SMURFS_START, 
     FETCH_SMURFS_SUCCESS, 
     FETCH_SMURFS_FAILURE } from "../actions/smurfsActions";
-import { ADD_SMURFS } from "../actions/addSmurfsActions";
+import { ADD_SMURFS, POST_SMURFS_START, POST_SMURFS_SUCCESS, POST_SMURFS_FAILURE } from "../actions/addSmurfsActions";
 
     const initialState = {
         network: {
@@ -32,10 +32,27 @@ export const smurfsReducer = (state = initialState, action) => {
                     ...state.network, isLoading: false, error: "you have an error!"}
             }
 
-        case ADD_SMURFS:
+        case POST_SMURFS_START:
             return{
-                ...state, smurfs: [...state.smurfs, action.payload] 
+                ...state, network:{...state.network, isLoading: true}
             }
+
+        case POST_SMURFS_SUCCESS:
+            return{
+                ...state, network:{...state.network, isLoading: false}
+            }
+
+        case POST_SMURFS_FAILURE:
+            return{
+                ...state, network:{
+                    ...state.network, isLoading: false, error: "you have an error!"}
+            }
+            
+        //This is for updating store directly from input (no server post)
+        // case ADD_SMURFS:
+        //     return{
+        //         ...state, smurfs: [...state.smurfs, action.payload] 
+        //     }
 
         default:
             return state
