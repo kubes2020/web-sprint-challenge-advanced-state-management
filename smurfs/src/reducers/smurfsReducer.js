@@ -4,20 +4,16 @@ import {
     FETCH_SMURFS_SUCCESS, 
     FETCH_SMURFS_FAILURE } from "../actions/smurfsActions";
 
-const initialState = {
-    network: {
-        isLoading: false,
-        erros: "",
-    },
-    
-    smurfs: [
-        {name: "", age: "", height: "", id: ""}
-    ]
-
-
-}
-
-
+    const initialState = {
+        network: {
+            isLoading: false,
+            erros: "",
+        },
+        
+        smurfs: [
+            
+        ]
+    }
 export const smurfsReducer = (state = initialState, action) => {
     console.log("action.payload!", action.payload)
     switch(action.type){
@@ -25,12 +21,52 @@ export const smurfsReducer = (state = initialState, action) => {
             return{
                 ...state, network:{...state.network, isLoading: true}
             }
+            case FETCH_SMURFS_SUCCESS:
+                return{
+                    ...state, smurfs: action.payload,
+                    network: {...state.network, isLoading: false}
+                }
+//need to also include isLoading: false
 
-        case FETCH_SMURFS_SUCCESS:
+        case FETCH_SMURFS_FAILURE:
             return{
-                ...state, smurfs: [...state.smurfs, ]
+                ...state, network:{
+                    ...state.network, isLoading: false, error: "you have an error!"}
             }
         default:
             return state
     }
 }
+
+
+// const initialState = {
+//     network: {
+//         isLoading: false,
+//         erros: "",
+//     },
+    
+//     smurfs: [
+//         {name: "", age: "", height: "", id: ""}
+//     ]
+// }
+
+// case FETCH_SMURFS_SUCCESS:
+//             return{
+//                 ...state, smurfs: [...state.smurfs, {
+//                     name: action.payload.name,
+//                     age: action.payload.age,
+//                     height: action.payload.height,
+//                     id: action.payload.height,
+//                 } ]
+//             }
+
+// case FETCH_SMURFS_SUCCESS:
+//                 return{
+//                     ...state, smurfs: [...state.smurfs, action.payload.map(item =>(
+//                         {name: item.name,
+//                         age: item.age,
+//                         height: item.height,
+//                         id: item.id,
+//                         }
+//                     ))]
+//                 }
