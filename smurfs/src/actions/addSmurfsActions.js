@@ -19,17 +19,12 @@ export const addSmurfs = (smurfObj) => (dispatch) => {
         })
         .catch(err => {
             console.log("Post error", err)
+            dispatch({ type: POST_SMURFS_FAILURE })
         }) 
 }
 
 
 //This is for adding smurfs to store directly
-// export function addSmurfs(smurfsObj){
-//     console.log("smurfsObj", smurfsObj)
-//     return { type: ADD_SMURFS, payload: smurfsObj}    
-// };
-
-
 // export const addSmurfs = (smurfObj) => (dispatch) => {
 //     dispatch({ type: ADD_SMURFS, payload: smurfObj})    
 // }

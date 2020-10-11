@@ -14,6 +14,6 @@ export const fetchSmurfs = (url="http://localhost:3333/smurfs") => dispatch => {
         })
         .catch(err => {
             console.log("Error getting data from res", err)
-            dispatch({ type: FETCH_SMURFS_FAILURE })
+            dispatch({ type: FETCH_SMURFS_FAILURE, payload: err })
         })
 }

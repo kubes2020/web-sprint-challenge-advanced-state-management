@@ -8,13 +8,13 @@ import { ADD_SMURFS, POST_SMURFS_START, POST_SMURFS_SUCCESS, POST_SMURFS_FAILURE
     const initialState = {
         network: {
             isLoading: false,
-            erros: "",
+            errors: "",
         },
         
         smurfs: []
     }
 export const smurfsReducer = (state = initialState, action) => {
-    console.log("action.payload!", action.payload)
+    console.log("action.payload!", action)
     switch(action.type){
         case FETCH_SMURFS_START:
             return{
@@ -29,7 +29,7 @@ export const smurfsReducer = (state = initialState, action) => {
         case FETCH_SMURFS_FAILURE:
             return{
                 ...state, network:{
-                    ...state.network, isLoading: false, error: "you have an error!"}
+                    ...state.network, isLoading: false, errors: JSON.stringify(action.payload)}
             }
 
         case POST_SMURFS_START:
@@ -45,7 +45,7 @@ export const smurfsReducer = (state = initialState, action) => {
         case POST_SMURFS_FAILURE:
             return{
                 ...state, network:{
-                    ...state.network, isLoading: false, error: "you have an error!"}
+                    ...state.network, isLoading: false, errors: JSON.stringify(action.payload) }
             }
             
         //This is for updating store directly from input (no server post)
@@ -60,34 +60,6 @@ export const smurfsReducer = (state = initialState, action) => {
 }
 
 
-// const initialState = {
-//     network: {
-//         isLoading: false,
-//         erros: "",
-//     },
-    
-//     smurfs: [
-//         {name: "", age: "", height: "", id: ""}
-//     ]
-// }
 
-// case FETCH_SMURFS_SUCCESS:
-//             return{
-//                 ...state, smurfs: [...state.smurfs, {
-//                     name: action.payload.name,
-//                     age: action.payload.age,
-//                     height: action.payload.height,
-//                     id: action.payload.height,
-//                 } ]
-//             }
 
-// case FETCH_SMURFS_SUCCESS:
-//                 return{
-//                     ...state, smurfs: [...state.smurfs, action.payload.map(item =>(
-//                         {name: item.name,
-//                         age: item.age,
-//                         height: item.height,
-//                         id: item.id,
-//                         }
-//                     ))]
-//                 }
+
