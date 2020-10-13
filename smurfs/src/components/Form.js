@@ -52,8 +52,8 @@ const Form = (props) => {
     )
 }
 
-const mapStateToProps = (state) =>{
-    return {  
-    }
-  }
-  export default connect(mapStateToProps, {addSmurfs, fetchSmurfs})(Form)
+// const mapStateToProps = (state) =>{
+//     return {  
+//     }
+//   }
+  export default connect(null, {addSmurfs, fetchSmurfs})(Form)
